@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy dotnet core project to Azure Function App - autoriza-docs-funcapp
+name: Build and deploy dotnet core app to Azure Function App - autoriza-docs-funcapp
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: 'Resolve Project Dependencies Using Dotnet'
-        shell: bash
+        shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
@@ -39,4 +39,4 @@ jobs:
           app-name: 'autoriza-docs-funcapp'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4FF22CB807D744C0B033CC2B985EE4EC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C374D1C5AF1D4336B6E9262F34770599 }}
